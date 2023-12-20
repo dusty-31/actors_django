@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<h1>Homepage</h1>
+	<ul class="list-articles">
+        {% for actor in actors %}
+            <li><h2>{{ actor.name }}</h2></li>
+            {{ actor.biography|truncatewords:40 }}
+            <div class="clear"></div>
+            <p class="link-read-post">
+                <a href="#">Learn more</a>
+            </p>
+        {% endfor %}
+    </ul>
 {% endblock %}
