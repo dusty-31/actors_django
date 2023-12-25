@@ -7,7 +7,7 @@
             {{ actor.biography|truncatewords:40 }}
             <div class="clear"></div>
             <p class="link-read-post">
-                <a href="{% url 'actors:post' actor.pk %}">Learn more</a>
+                <a href="{{ actor.get_absolute_url }}">Learn more</a>
             </p>
         {% endfor %}
     </ul>

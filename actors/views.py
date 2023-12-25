@@ -29,8 +29,8 @@ def category_view(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request=request, template_name='actors/index.html', context=context)
 
 
-def post_view(request: HttpRequest, pk: int) -> HttpResponse:
-    actor = get_object_or_404(klass=Actor, pk=pk)
+def post_view(request: HttpRequest, post_slug: str) -> HttpResponse:
+    actor = get_object_or_404(klass=Actor, slug=post_slug)
     context = {
         'title': f'Post about {actor.first_name} {actor.last_name}',
         'post': actor,
