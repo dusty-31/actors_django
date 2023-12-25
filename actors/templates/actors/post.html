@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>{{ post.first_name }} {{ post.last_name }}</h1>
+    {% if post.photo %}
+        <p>
+            <img class="img-article-left" src="{{ post.photo.url }}" alt="actor_photo">
+        </p>
+    {% endif %}
+    <p>{{ post.biography }}</p>
+{% endblock %}

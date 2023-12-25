@@ -3,11 +3,11 @@
 {% block content %}
 	<ul class="list-articles">
         {% for actor in actors %}
-            <li><h2>{{ actor.name }}</h2></li>
+            <li><h2>{{ actor.first_name }} {{ actor.last_name }}</h2></li>
             {{ actor.biography|truncatewords:40 }}
             <div class="clear"></div>
             <p class="link-read-post">
-                <a href="#">Learn more</a>
+                <a href="{% url 'actors:post' actor.pk %}">Learn more</a>
             </p>
         {% endfor %}
     </ul>
