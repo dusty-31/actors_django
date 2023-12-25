@@ -7,7 +7,7 @@ from .models import Actor
 def index_view(request: HttpRequest) -> HttpResponse:
     context = {
         'title': 'Homepage',
-        'actors': Actor.objects.all(),
+        'actors': Actor.objects.filter(is_published=True),
         'category_selected': 0,
     }
     return render(request=request, template_name='actors/index.html', context=context)
@@ -23,7 +23,7 @@ def about_view(request: HttpRequest) -> HttpResponse:
 def category_view(request: HttpRequest, pk: int) -> HttpResponse:
     context = {
         'title': f'Categories {pk}',
-        'actors': Actor.objects.all(),
+        'actors': Actor.objects.filter(is_published=True),
         'category_selected': pk,
     }
     return render(request=request, template_name='actors/index.html', context=context)
