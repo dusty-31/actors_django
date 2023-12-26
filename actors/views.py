@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
-from .models import Actor
+from .models import Actor, Category
 
 
 def index_view(request: HttpRequest) -> HttpResponse:
@@ -20,11 +20,12 @@ def about_view(request: HttpRequest) -> HttpResponse:
     return render(request=request, template_name='actors/about.html', context=context)
 
 
-def category_view(request: HttpRequest, pk: int) -> HttpResponse:
+def category_view(request: HttpRequest, category_slug: str) -> HttpResponse:
+    category = get_object_or_404(klass=Category, slug=category_slug)
     context = {
-        'title': f'Categories {pk}',
-        'actors': Actor.published.all(),
-        'category_selected': pk,
+        'title': f'Categories {category.name}',
+        'actors': Actor.published.filter(category=category),
+        'category_selected': category_slug,
     }
     return render(request=request, template_name='actors/index.html', context=context)
 

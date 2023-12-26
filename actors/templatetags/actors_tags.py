@@ -1,20 +1,16 @@
 from django import template
 
+from actors.models import Category
+
 register = template.Library()
 
 
 @register.simple_tag()
 def get_categories():
-    return [
-        {'id': 1, 'name': 'Women'},
-        {'id': 2, 'name': 'Men'},
-    ]
+    return Category.objects.all()
 
 
 @register.inclusion_tag(filename='actors/list_categories.html')
 def show_categories(category_selected=0):
-    categories = [
-        {'id': 1, 'name': 'Women'},
-        {'id': 2, 'name': 'Men'},
-    ]
+    categories = Category.objects.all()
     return {'categories': categories, 'category_selected': category_selected}
