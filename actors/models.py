@@ -49,7 +49,7 @@ class Actor(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=PublishedStatus.choices, default=PublishedStatus.DRAFT)
-    category = models.ForeignKey(to=Category, on_delete=models.PROTECT, null=True)
+    category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
     tags = models.ManyToManyField(related_name='tags', to=Tag, blank=True)
     producer = models.OneToOneField(related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True,
                                     blank=True)
