@@ -1,0 +1,86 @@
+{% load static %}
+{% load actors_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link type="text/css" href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link type="image/x-icon" href="{% static 'images/main.ico' %}" rel="shortcut icon">
+    <title>{{ title }}</title>
+</head>
+<body>
+<td class="table-page" border=0 cellpadding="0" cellspacing="0">
+    <tr>
+<td valign="top">
+    {% block main_menu %}
+        <div class="header">
+            <ul id="main-menu" class="main-menu">
+                <li class="logo">
+                    <a href="{% url 'actors:index' %}">
+                        <div class="logo"></div>
+                    </a>
+                </li>
+                {% for menu_element in menu_list %}
+                    {% if not forloop.last %}
+                        <li>
+                            {% else %}
+                        <li class="last">
+                    {% endif %}
+                <a href='#'>{{ menu_element.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+</td>
+</tr>
+<table class="table-content" border=0 cellspacing="0" cellpadding="0">
+    <tr>
+        <td valign="top" class="left-chapters">
+            <ul id="left-chapters">
+                {% if category_selected == 0 %}
+                    <li class="selected">All categories</li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'actors:index' %}">All categories</a>
+                    </li>
+                {% endif %}
+                {% show_categories category_selected %}
+                <li class="share">
+                    <a class="share-yt" href="https://www.youtube.com"></a>
+                </li>
+                
+                <li>
+                    {% show_tags %}
+                </li>
+            </ul>
+        </td>
+        <td valign="top" class="content">
+            {% block breadcrumbs %}
+
+            {% endblock %}
+            <div class="content-text">
+                {% block content %} {% endblock %}
+            </div>
+        </td>
+    </tr>
+</table>
+</td>
+<tr>
+    <td valign="top">
+        <div id="footer">
+            <p>
+                Copyright.
+            </p>
+        </div>
+    </td>
+</tr>
+</table>
+</body>
+</html>
