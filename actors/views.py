@@ -7,7 +7,7 @@ from .models import Actor, Category, Tag
 def index_view(request: HttpRequest) -> HttpResponse:
     context = {
         'title': 'Homepage',
-        'actors': Actor.published.all(),
+        'actors': Actor.published.all().select_related('category'),
         'category_selected': 0,
     }
     return render(request=request, template_name='actors/index.html', context=context)
@@ -24,7 +24,7 @@ def category_view(request: HttpRequest, category_slug: str) -> HttpResponse:
     category = get_object_or_404(klass=Category, slug=category_slug)
     context = {
         'title': f'Categories {category.name}',
-        'actors': Actor.published.filter(category=category),
+        'actors': Actor.published.filter(category=category).select_related('category'),
         'category_selected': category.slug,
     }
     return render(request=request, template_name='actors/index.html', context=context)
