@@ -17,6 +17,21 @@ class Category(models.Model):
         return reverse(viewname='actors:category', kwargs={'category_slug': self.slug})
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, default='')
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = str(self.name).lower().replace(' ', '-')
+        return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(viewname='actors:tag', kwargs={'tag_slug': self.slug})
+
+
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(is_published=Actor.PublishedStatus.PUBLISHED)
@@ -35,6 +50,7 @@ class Actor(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=PublishedStatus.choices, default=PublishedStatus.DRAFT)
     category = models.ForeignKey(to=Category, on_delete=models.PROTECT, null=True)
+    tags = models.ManyToManyField(related_name='tags', to=Tag, blank=True)
 
     objects = models.Manager()
     published = PublishedManager()

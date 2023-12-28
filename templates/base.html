@@ -44,7 +44,7 @@
     <tr>
         <td valign="top" class="left-chapters">
             <ul id="left-chapters">
-                {% if category_selected == 0 or category_selected is None %}
+                {% if category_selected == 0 %}
                     <li class="selected">All categories</li>
                 {% else %}
                     <li>
@@ -52,7 +52,13 @@
                     </li>
                 {% endif %}
                 {% show_categories category_selected %}
-                <li class="share"></li>
+                <li class="share">
+                    <a class="share-yt" href="https://www.youtube.com"></a>
+                </li>
+                
+                <li>
+                    {% show_tags %}
+                </li>
             </ul>
         </td>
         <td valign="top" class="content">
