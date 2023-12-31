@@ -6,6 +6,9 @@ class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, unique=True, default='')
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     def __str__(self):
         return self.name
 
@@ -20,6 +23,9 @@ class Category(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=255, unique=True, default='')
+
+    class Meta:
+        verbose_name_plural = 'Tags'
 
     def __str__(self):
         return self.name
@@ -48,7 +54,8 @@ class Actor(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, default='')
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(choices=PublishedStatus.choices, default=PublishedStatus.DRAFT)
+    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)),
+                                       default=PublishedStatus.DRAFT)
     category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
     tags = models.ManyToManyField(related_name='tags', to=Tag, blank=True)
     producer = models.OneToOneField(related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True,
