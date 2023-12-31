@@ -3,6 +3,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from .models import Actor, Category, Tag, Producer
+from .services import pluralize
 
 
 class ProducerFilter(admin.SimpleListFilter):
@@ -24,19 +25,17 @@ class ProducerFilter(admin.SimpleListFilter):
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
+    fields = ('first_name', 'last_name', 'slug', 'biography', 'category', 'producer')
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
     list_display = ('id', 'get_full_name', 'time_create', 'is_published', 'category')
     list_display_links = ('id', 'get_full_name')
     ordering = ('id',)
     list_editable = ('is_published',)
     actions = ('publish_actors', 'remove_from_publication')
     search_fields = ('first_name', 'last_name', 'category__name')
-    list_filter = (ProducerFilter,'category', 'is_published',)
+    list_filter = (ProducerFilter, 'category', 'is_published',)
 
     ACTOR_WORD = 'actor'
-
-    @staticmethod
-    def pluralize(count: int) -> str:
-        return ActorAdmin.ACTOR_WORD if count <= 1 else ActorAdmin.ACTOR_WORD + 's'
 
     @staticmethod
     def publish_actor(actor: Actor) -> bool:
@@ -56,7 +55,7 @@ class ActorAdmin(admin.ModelAdmin):
 
     def notify_status(self, request: HttpRequest, count: int, message: str, level: int) -> None:
         if count:
-            word = self.pluralize(count=count)
+            word = pluralize(count=count, word=self.ACTOR_WORD)
             self.message_user(request=request,
                               message=message.format(count=count, word=word),
                               level=level)

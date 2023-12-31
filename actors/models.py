@@ -1,5 +1,8 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
+
+from .services import cyrillic_to_latin
 
 
 class Category(models.Model):
@@ -68,11 +71,15 @@ class Actor(models.Model):
         return f'{self.first_name} {self.last_name} | ID: {self.id}'
 
     def save(self, *args, **kwargs):
-        self.slug = f'{str(self.first_name).lower().replace(' ', '-')}-{str(self.last_name).lower().replace(' ', '-')}'
+        self.slug = slugify(cyrillic_to_latin(cyrillic_text=self.get_full_name()))
+
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse(viewname='actors:post', kwargs={'post_slug': self.slug})
+
+    def get_full_name(self) -> str:
+        return f'{self.first_name} {self.last_name}'
 
 
 class Producer(models.Model):
