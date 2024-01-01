@@ -25,15 +25,18 @@
                         <div class="logo"></div>
                     </a>
                 </li>
-                {% for menu_element in menu_list %}
-                    {% if not forloop.last %}
-                        <li>
-                            {% else %}
-                        <li class="last">
-                    {% endif %}
-                <a href='#'>{{ menu_element.title }}</a>
+                <li>
+                    <a href="#">About Us</a>
                 </li>
-                {% endfor %}
+                <li>
+                    <a href="{% url 'actors:add_actor' %}">Add post</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li class="last">
+                    <a href="#">Login</a>
+                </li>
             </ul>
             <div class="clear"></div>
         </div>
@@ -55,7 +58,7 @@
                 <li class="share">
                     <a class="share-yt" href="https://www.youtube.com"></a>
                 </li>
-                
+
                 <li>
                     {% show_tags %}
                 </li>
