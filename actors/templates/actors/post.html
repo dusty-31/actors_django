@@ -6,11 +6,11 @@
         {% if tags %}
             <ul class="tags-list">
                 <li>Tags:</li>
-                    {% for tag in tags %}
-                    	<li>
-                            <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
-                        </li>
-                    {% endfor %}
+                {% for tag in tags %}
+                    <li>
+                        <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
@@ -21,6 +21,10 @@
     {% if post.photo %}
         <p>
             <img class="img-article-left" src="{{ actor.photo.url }}" alt="actor_photo">
+        </p>
+    {% else %}
+        <p>
+            <img class="img-article-left" src="{% static 'images/default.jpeg' %}" alt="default_photo">
         </p>
     {% endif %}
     <p>{{ actor.biography }}</p>

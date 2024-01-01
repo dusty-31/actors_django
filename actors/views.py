@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
+from .forms import ActorForm
 from .models import Actor, Category, Tag
 
 
@@ -49,3 +50,18 @@ def tag_view(request: HttpRequest, tag_slug: str) -> HttpResponse:
         'category_selected': None,
     }
     return render(request=request, template_name='actors/index.html', context=context)
+
+
+def add_actor_view(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        form = ActorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('actors:index')
+    else:
+        form = ActorForm()
+    context = {
+        'title': 'Add new post',
+        'form': form,
+    }
+    return render(request=request, template_name='actors/add_actor.html', context=context)

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
     <ul class="list-articles">
         {% for actor in actors %}
@@ -9,6 +10,11 @@
                     <p class="last">Date: {{ actor.time_update|date:"d-m-Y H:i:s" }}</p>
                 </div>
                 <h2>{{ actor.first_name }} {{ actor.last_name }}</h2>
+                {% if actor.photo %}
+                    <img class="img-article-left thumb" src="{{ actor.photo.url }}" alt="photo">
+                {% else %}
+                    <img class="img-article-left thumb" src="{% static 'images/default.jpeg' %}" alt="default_photo">
+                {% endif %}
             </li>
             {{ actor.biography|truncatewords:40 }}
             <div class="clear"></div>
