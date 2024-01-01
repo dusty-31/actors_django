@@ -18,7 +18,7 @@
 
 {% block content %}
     <h1>{{ actor.first_name }} {{ actor.last_name }}</h1>
-    {% if post.photo %}
+    {% if actor.photo %}
         <p>
             <img class="img-article-left" src="{{ actor.photo.url }}" alt="actor_photo">
         </p>

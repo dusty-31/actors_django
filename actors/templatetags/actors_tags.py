@@ -13,5 +13,5 @@ def show_categories(category_selected=0):
 
 @register.inclusion_tag(filename='actors/includes/list_tags.html')
 def show_tags(tags_selected=0):
-    tags = Tag.objects.annotate(total=Count('tags')).filter(total__gt=0)
+    tags = Tag.objects.annotate(total=Count('actors')).filter(total__gt=0)
     return {'tags': tags, 'tags_selected': tags_selected}
