@@ -39,7 +39,7 @@ class ActorForm(forms.Form):
     )
     producer = forms.ModelChoiceField(
         label='Producer(optional):',
-        queryset=Producer.objects.all(),
+        queryset=Producer.objects.filter(producer=None),
         empty_label='Select producer',
         required=False
     )
