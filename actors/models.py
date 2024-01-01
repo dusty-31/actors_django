@@ -59,6 +59,8 @@ class Actor(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)),
                                        default=PublishedStatus.DRAFT)
+    photo = models.ImageField(upload_to='actors_photos/%Y/%m/%d/', blank=True, null=True,
+                              default='static/images/default.jpg')
     category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
     tags = models.ManyToManyField(related_name='tags', to=Tag, blank=True)
     producer = models.OneToOneField(related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True,

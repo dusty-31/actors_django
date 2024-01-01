@@ -54,7 +54,7 @@ def tag_view(request: HttpRequest, tag_slug: str) -> HttpResponse:
 
 def add_actor_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
-        form = ActorForm(request.POST)
+        form = ActorForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('actors:index')

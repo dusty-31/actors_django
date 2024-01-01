@@ -22,11 +22,12 @@ class ActorForm(forms.ModelForm):
 
     class Meta:
         model = Actor
-        fields = ('first_name', 'last_name', 'biography', 'is_published','category', 'producer')
+        fields = ('first_name', 'last_name', 'biography', 'photo', 'is_published', 'category', 'producer')
         labels = {
             'first_name': 'First name:',
             'last_name': 'Last name:',
             'biography': 'Biography:',
+            'photo': 'Photo:'
         }
         widgets = {
             'first_name': forms.TextInput(attrs={
