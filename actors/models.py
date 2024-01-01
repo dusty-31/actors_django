@@ -16,7 +16,7 @@ class Category(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = str(self.name).lower().replace(' ', '-')
+        self.slug = slugify(cyrillic_to_latin(cyrillic_text=str(self.name)))
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):

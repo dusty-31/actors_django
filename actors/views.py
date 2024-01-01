@@ -56,7 +56,7 @@ def add_actor_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = ActorForm(request.POST)
         if form.is_valid():
-            Actor.objects.create(**form.cleaned_data)
+            form.save()
             return redirect('actors:index')
     else:
         form = ActorForm()
