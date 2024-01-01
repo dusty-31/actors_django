@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ActorForm
 from .models import Actor, Category, Tag
@@ -56,7 +56,8 @@ def add_actor_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = ActorForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            Actor.objects.create(**form.cleaned_data)
+            return redirect('actors:index')
     else:
         form = ActorForm()
     context = {
