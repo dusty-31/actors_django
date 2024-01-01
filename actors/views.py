@@ -1,8 +1,9 @@
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 
 from .forms import ActorForm
 from .models import Actor, Category, Tag
@@ -82,22 +83,14 @@ class TagListView(ListView):
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class CreateActorView(View):
-    def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        form = ActorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('actors:index')
-        context = {
-            'title': 'Create Actor',
-            'form': form,
-        }
-        return render(request=request, template_name='actors/add_actor.html', context=context)
+class ActorFormView(FormView):
+    form_class = ActorForm
+    template_name = 'actors/add_actor.html'
+    success_url = reverse_lazy('actors:index')
+    extra_context = {
+        'title': 'Create actor',
+    }
 
-    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        form = ActorForm()
-        context = {
-            'title': 'Create Actor',
-            'form': form,
-        }
-        return render(request=request, template_name='actors/add_actor.html', context=context)
+    def form_valid(self, form: ActorForm) -> HttpResponse:
+        form.save()
+        return super().form_valid(form)

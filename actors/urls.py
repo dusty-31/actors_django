@@ -10,5 +10,5 @@ urlpatterns = [
     path('category/<slug:category_slug>', views.CategoryListView.as_view(), name='category'),
     path('post/<slug:slug>', views.ActorDetailView.as_view(), name='post'),
     path('tag/<slug:tag_slug>', views.TagListView.as_view(), name='tag'),
-    path('add_actor/', views.CreateActorView.as_view(), name='add_actor'),
+    path('add_actor/', views.ActorFormView.as_view(), name='add_actor'),
 ]
