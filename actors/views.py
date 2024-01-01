@@ -35,6 +35,7 @@ class CategoryListView(ListView):
     template_name = 'actors/index.html'
     context_object_name = 'actors'
     paginate_by = 10
+    allow_empty = False
 
     def get_queryset(self) -> QuerySet:
         return Actor.published.filter(category__slug=self.kwargs['category_slug']).select_related('category')
@@ -53,11 +54,14 @@ class ActorDetailView(DetailView):
     context_object_name = 'actor'
 
     def get_context_data(self, **kwargs):
-        actor = get_object_or_404(Actor, slug=self.kwargs['slug'])
+        actor = get_object_or_404(Actor, slug=self.kwargs[self.slug_url_kwarg])
         context = super().get_context_data(**kwargs)
         context['title'] = f'Actor {actor.get_full_name()}'
         context['category_selected'] = actor.category.slug
         return context
+
+    def get_object(self, **kwargs):
+        return get_object_or_404(Actor.published, slug=self.kwargs[self.slug_url_kwarg])
 
 
 class TagListView(ListView):
@@ -65,15 +69,17 @@ class TagListView(ListView):
     template_name = 'actors/index.html'
     context_object_name = 'actors'
     paginate_by = 10
+    allow_empty = False
 
     def get_context_data(self, **kwargs):
         tag = get_object_or_404(klass=Tag, slug=self.kwargs['tag_slug'])
-        actors = tag.actors.filter(is_published=Actor.PublishedStatus.PUBLISHED)
         context = super().get_context_data(**kwargs)
-        context['actors'] = actors
         context['title'] = f'Tag {tag.name}'
         context['category_selected'] = None
         return context
+
+    def get_queryset(self):
+        return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
 class CreateActorView(View):
