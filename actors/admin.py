@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.db.models import QuerySet
 from django.http import HttpRequest
+from django.utils.safestring import mark_safe
 
 from .models import Actor, Category, Tag, Producer
 from .services import pluralize
@@ -25,15 +26,17 @@ class ProducerFilter(admin.SimpleListFilter):
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
-    fields = ('first_name', 'last_name', 'slug', 'biography', 'category', 'producer')
+    fields = ('first_name', 'last_name', 'slug', 'get_photo', 'photo', 'biography', 'category', 'producer')
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
-    list_display = ('id', 'get_full_name', 'time_create', 'is_published', 'category')
+    list_display = ('id', 'get_full_name', 'get_small_photo', 'time_create', 'is_published', 'category')
     list_display_links = ('id', 'get_full_name')
     ordering = ('id',)
-    list_editable = ('is_published',)
+    readonly_fields = ('get_photo', )
     actions = ('publish_actors', 'remove_from_publication')
     search_fields = ('first_name', 'last_name', 'category__name')
     list_filter = (ProducerFilter, 'category', 'is_published',)
+
+    save_on_top = True
 
     ACTOR_WORD = 'actor'
 
@@ -63,6 +66,18 @@ class ActorAdmin(admin.ModelAdmin):
     @admin.display(description='Full name')
     def get_full_name(self, actor: Actor) -> str:
         return f'{actor.first_name} {actor.last_name}'
+
+    @admin.display(description='Photo')
+    def get_photo(self, actor: Actor) -> str:
+        if actor.photo:
+            return mark_safe(f'<img src="{actor.photo.url}" width="150">')
+        return mark_safe('<img src="/static/images/default.jpeg" width="150">')
+
+    @admin.display(description='Photo')
+    def get_small_photo(self, actor: Actor) -> str:
+        if actor.photo:
+            return mark_safe(f'<img src="{actor.photo.url}" width="50">')
+        return mark_safe('<img src="/static/images/default.jpeg" width="50">')
 
     @admin.action(description='Publish selected actors')
     def publish_actors(self, request: HttpRequest, queryset: QuerySet) -> None:
