@@ -31,7 +31,7 @@ class ActorAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_full_name', 'get_small_photo', 'time_create', 'is_published', 'category')
     list_display_links = ('id', 'get_full_name')
     ordering = ('id',)
-    readonly_fields = ('get_photo', )
+    readonly_fields = ('get_photo',)
     actions = ('publish_actors', 'remove_from_publication')
     search_fields = ('first_name', 'last_name', 'category__name')
     list_filter = (ProducerFilter, 'category', 'is_published', 'tags')
@@ -85,28 +85,34 @@ class ActorAdmin(admin.ModelAdmin):
         successfully_published = sum(self.publish_actor(actor=actor) for actor in queryset)
         not_published = len(queryset) - successfully_published
 
-        self.notify_status(request=request,
-                           count=successfully_published,
-                           message='Successfully published {count} {word}.',
-                           level=messages.SUCCESS)
-        self.notify_status(request=request,
-                           count=not_published,
-                           message='Changes weren\'t applied to {count} {word}.',
-                           level=messages.WARNING)
+        self.notify_status(
+            request=request,
+            count=successfully_published,
+            message='Successfully published {count} {word}.',
+            level=messages.SUCCESS,
+        )
+        self.notify_status(
+            request=request,
+            count=not_published,
+            message='Changes weren\'t applied to {count} {word}.',
+            level=messages.WARNING,
+        )
 
     @admin.action(description='Remove from publication selected actors')
     def remove_from_publication(self, request: HttpRequest, queryset: QuerySet) -> None:
         successfully_removed = sum(self.unpublish_actor(actor=actor) for actor in queryset)
         not_removed = len(queryset) - successfully_removed
 
-        self.notify_status(request=request,
-                           count=successfully_removed,
-                           message='Successfully removed {count} {word}.',
-                           level=messages.SUCCESS)
-        self.notify_status(request=request,
-                           count=not_removed,
-                           message='Changes weren\'t applied to {count} {word}.',
-                           level=messages.WARNING)
+        self.notify_status(
+            request=request,
+            count=successfully_removed,
+            message='Successfully removed {count} {word}.',
+            level=messages.SUCCESS)
+        self.notify_status(
+            request=request,
+            count=not_removed,
+            message='Changes weren\'t applied to {count} {word}.',
+            level=messages.WARNING)
 
 
 @admin.register(Category)

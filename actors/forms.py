@@ -35,15 +35,18 @@ class ActorForm(forms.ModelForm):
             'photo': 'Photo:'
         }
         widgets = {
-            'first_name': forms.TextInput(attrs={
-                'class': 'form-input',
-            }),
-            'last_name': forms.TextInput(attrs={
-                'class': 'form-input',
-            }),
-            'biography': forms.Textarea(attrs={
-                'cols': 50,
-                'rows': 5,
-            }),
+            'first_name': forms.TextInput(
+                attrs={
+                    'class': 'form-input',
+                }),
+            'last_name': forms.TextInput(
+                attrs={
+                    'class': 'form-input',
+                }),
+            'biography': forms.Textarea(
+                attrs={
+                    'cols': 50,
+                    'rows': 5,
+                }),
             'is_published': forms.CheckboxInput()
         }

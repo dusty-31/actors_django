@@ -46,10 +46,11 @@ class CategoryListView(DataMixin, ListView):
     def get_context_data(self, **kwargs) -> dict:
         category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context=context,
-                                      title=f'Category - {category.name}',
-                                      category_selected=category.slug,
-                                      )
+        return self.get_mixin_context(
+            context=context,
+            title=f'Category - {category.name}',
+            category_selected=category.slug,
+        )
 
 
 class ActorDetailView(DataMixin, DetailView):
@@ -60,10 +61,11 @@ class ActorDetailView(DataMixin, DetailView):
     def get_context_data(self, **kwargs) -> dict:
         actor = get_object_or_404(Actor, slug=self.kwargs[self.slug_url_kwarg])
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context=context,
-                                      title=f'Actor - {actor.get_full_name()}',
-                                      selected_category=actor.category.slug,
-                                      )
+        return self.get_mixin_context(
+            context=context,
+            title=f'Actor - {actor.get_full_name()}',
+            selected_category=actor.category.slug,
+        )
 
     def get_object(self, **kwargs) -> Actor:
         return get_object_or_404(Actor.published, slug=self.kwargs[self.slug_url_kwarg])
