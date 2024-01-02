@@ -19,6 +19,10 @@
             {{ actor.biography|truncatewords:40 }}
             <div class="clear"></div>
             <p class="link-read-post">
+                <a href="{% url 'actors:update_actor' actor.slug %}">Edit post</a>
+            </p>
+            <div class="clear"></div>
+            <p class="link-read-post">
                 <a href="{{ actor.get_absolute_url }}">Learn more</a>
             </p>
         {% endfor %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Actor, Category, Producer
+from .models import Actor, Category, Producer, Tag
 
 
 class ActorForm(forms.ModelForm):
@@ -19,10 +19,15 @@ class ActorForm(forms.ModelForm):
         required=False,
         initial=True
     )
+    tags = forms.ModelMultipleChoiceField(
+        label='Tags:',
+        queryset=Tag.objects.all(),
+        required=False
+    )
 
     class Meta:
         model = Actor
-        fields = ('first_name', 'last_name', 'biography', 'photo', 'is_published', 'category', 'producer')
+        fields = ('first_name', 'last_name', 'biography', 'photo', 'is_published', 'category', 'tags', 'producer')
         labels = {
             'first_name': 'First name:',
             'last_name': 'Last name:',

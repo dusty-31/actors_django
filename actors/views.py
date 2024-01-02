@@ -1,9 +1,8 @@
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import ActorForm
 from .models import Actor, Category, Tag
@@ -83,14 +82,18 @@ class TagListView(ListView):
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class ActorFormView(FormView):
+class ActorFormView(CreateView):
     form_class = ActorForm
-    template_name = 'actors/add_actor.html'
-    success_url = reverse_lazy('actors:index')
+    template_name = 'actors/form.html'
     extra_context = {
         'title': 'Create actor',
     }
 
-    def form_valid(self, form: ActorForm) -> HttpResponse:
-        form.save()
-        return super().form_valid(form)
+
+class ActorUpdateView(UpdateView):
+    model = Actor
+    form_class = ActorForm
+    template_name = 'actors/form.html'
+    extra_context = {
+        'title': 'Update actor',
+    }

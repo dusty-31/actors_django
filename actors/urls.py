@@ -11,4 +11,5 @@ urlpatterns = [
     path('post/<slug:slug>', views.ActorDetailView.as_view(), name='post'),
     path('tag/<slug:tag_slug>', views.TagListView.as_view(), name='tag'),
     path('add_actor/', views.ActorFormView.as_view(), name='add_actor'),
+    path('update_actor/<slug:slug>', views.ActorUpdateView.as_view(), name='update_actor'),
 ]
