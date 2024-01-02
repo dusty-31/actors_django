@@ -6,19 +6,22 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import ActorForm
 from .models import Actor, Category, Tag
+from .utils import DataMixin
 
 
-class IndexListView(ListView):
+class IndexListView(DataMixin, ListView):
     model = Actor
     template_name = 'actors/index.html'
     context_object_name = 'actors'
     paginate_by = 10
-    extra_context = {
-        'title': 'Homepage',
-        'category_selected': 0,
-    }
+    title_page = 'Homepage'
+    category_selected = 0
 
-    def get_queryset(self) -> QuerySet:
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context=context)
+
+    def get_queryset(self) -> QuerySet[Actor]:
         return Actor.published.all().select_related('category')
 
 
@@ -30,70 +33,66 @@ class AboutView(View):
         return render(request=request, template_name='actors/about.html', context=context)
 
 
-class CategoryListView(ListView):
+class CategoryListView(DataMixin, ListView):
     model = Actor
     template_name = 'actors/index.html'
     context_object_name = 'actors'
     paginate_by = 10
     allow_empty = False
 
-    def get_queryset(self) -> QuerySet:
+    def get_queryset(self) -> QuerySet[Actor]:
         return Actor.published.filter(category__slug=self.kwargs['category_slug']).select_related('category')
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
         context = super().get_context_data(**kwargs)
-        context['title'] = f'Category {category.name}'
-        context['category_selected'] = category.slug
-        return context
+        return self.get_mixin_context(context=context,
+                                      title=f'Category - {category.name}',
+                                      category_selected=category.slug,
+                                      )
 
 
-class ActorDetailView(DetailView):
+class ActorDetailView(DataMixin, DetailView):
     model = Actor
     template_name = 'actors/post.html'
     context_object_name = 'actor'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         actor = get_object_or_404(Actor, slug=self.kwargs[self.slug_url_kwarg])
         context = super().get_context_data(**kwargs)
-        context['title'] = f'Actor {actor.get_full_name()}'
-        context['category_selected'] = actor.category.slug
-        return context
+        return self.get_mixin_context(context=context,
+                                      title=f'Actor - {actor.get_full_name()}',
+                                      selected_category=actor.category.slug,
+                                      )
 
-    def get_object(self, **kwargs):
+    def get_object(self, **kwargs) -> Actor:
         return get_object_or_404(Actor.published, slug=self.kwargs[self.slug_url_kwarg])
 
 
-class TagListView(ListView):
+class TagListView(DataMixin, ListView):
     model = Actor
     template_name = 'actors/index.html'
     context_object_name = 'actors'
     paginate_by = 10
     allow_empty = False
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         tag = get_object_or_404(klass=Tag, slug=self.kwargs['tag_slug'])
         context = super().get_context_data(**kwargs)
-        context['title'] = f'Tag {tag.name}'
-        context['category_selected'] = None
-        return context
+        return self.get_mixin_context(context=context, title=f'Tag - {tag.name}')
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Actor]:
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class ActorFormView(CreateView):
+class ActorFormView(DataMixin, CreateView):
     form_class = ActorForm
     template_name = 'actors/form.html'
-    extra_context = {
-        'title': 'Create actor',
-    }
+    title_page = 'Add post'
 
 
-class ActorUpdateView(UpdateView):
+class ActorUpdateView(DataMixin, UpdateView):
     model = Actor
     form_class = ActorForm
     template_name = 'actors/form.html'
-    extra_context = {
-        'title': 'Update actor',
-    }
+    title_page = 'Edit post'
