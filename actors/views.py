@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -87,13 +88,18 @@ class TagListView(DataMixin, ListView):
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class ActorFormView(DataMixin, CreateView):
+class ActorFormView(LoginRequiredMixin, DataMixin, CreateView):
     form_class = ActorForm
     template_name = 'actors/form.html'
     title_page = 'Add post'
 
+    def form_valid(self, form):
+        actor = form.save(commit=False)
+        actor.author = self.request.user
+        return super().form_valid(form)
 
-class ActorUpdateView(DataMixin, UpdateView):
+
+class ActorUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
     model = Actor
     form_class = ActorForm
     template_name = 'actors/form.html'

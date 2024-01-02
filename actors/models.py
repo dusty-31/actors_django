@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import QuerySet
 from django.template.defaultfilters import slugify
@@ -80,6 +81,12 @@ class Actor(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True
+    )
+    author = models.ForeignKey(
+        related_name='actors',
+        to=get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
     )
 
     objects = models.Manager()

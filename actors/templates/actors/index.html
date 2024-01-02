@@ -6,7 +6,10 @@
         {% for actor in actors %}
             <li>
                 <div class="article-panel">
-                    <p class="first">Category: {{ actor.category.name }}</p>
+                    <p class="first">
+                        Category: {{ actor.category.name }} |
+                        Author: {{ actor.author.username|default:unknown }} |
+                    </p>
                     <p class="last">Date: {{ actor.time_update|date:"d-m-Y H:i:s" }}</p>
                 </div>
                 <h2>{{ actor.first_name }} {{ actor.last_name }}</h2>
