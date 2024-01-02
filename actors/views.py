@@ -1,67 +1,98 @@
+from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import ActorForm
 from .models import Actor, Category, Tag
+from .utils import DataMixin
 
 
-def index_view(request: HttpRequest) -> HttpResponse:
-    context = {
-        'title': 'Homepage',
-        'actors': Actor.published.all().select_related('category'),
-        'category_selected': 0,
-    }
-    return render(request=request, template_name='actors/index.html', context=context)
+class IndexListView(DataMixin, ListView):
+    model = Actor
+    template_name = 'actors/index.html'
+    context_object_name = 'actors'
+    paginate_by = 10
+    title_page = 'Homepage'
+    category_selected = 0
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context=context)
+
+    def get_queryset(self) -> QuerySet[Actor]:
+        return Actor.published.all().select_related('category')
 
 
-def about_view(request: HttpRequest) -> HttpResponse:
-    context = {
-        'title': 'About',
-    }
-    return render(request=request, template_name='actors/about.html', context=context)
+class AboutView(View):
+    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
+        context = {
+            'title': 'About Us',
+        }
+        return render(request=request, template_name='actors/about.html', context=context)
 
 
-def category_view(request: HttpRequest, category_slug: str) -> HttpResponse:
-    category = get_object_or_404(klass=Category, slug=category_slug)
-    context = {
-        'title': f'Categories {category.name}',
-        'actors': Actor.published.filter(category=category).select_related('category'),
-        'category_selected': category.slug,
-    }
-    return render(request=request, template_name='actors/index.html', context=context)
+class CategoryListView(DataMixin, ListView):
+    model = Actor
+    template_name = 'actors/index.html'
+    context_object_name = 'actors'
+    paginate_by = 10
+    allow_empty = False
+
+    def get_queryset(self) -> QuerySet[Actor]:
+        return Actor.published.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+
+    def get_context_data(self, **kwargs) -> dict:
+        category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context=context,
+                                      title=f'Category - {category.name}',
+                                      category_selected=category.slug,
+                                      )
 
 
-def post_view(request: HttpRequest, post_slug: str) -> HttpResponse:
-    actor = get_object_or_404(klass=Actor, slug=post_slug)
-    context = {
-        'title': f'Post about {actor.first_name} {actor.last_name}',
-        'actor': actor,
-        'category_selected': actor.category.slug,
-    }
-    return render(request=request, template_name='actors/post.html', context=context)
+class ActorDetailView(DataMixin, DetailView):
+    model = Actor
+    template_name = 'actors/post.html'
+    context_object_name = 'actor'
+
+    def get_context_data(self, **kwargs) -> dict:
+        actor = get_object_or_404(Actor, slug=self.kwargs[self.slug_url_kwarg])
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context=context,
+                                      title=f'Actor - {actor.get_full_name()}',
+                                      selected_category=actor.category.slug,
+                                      )
+
+    def get_object(self, **kwargs) -> Actor:
+        return get_object_or_404(Actor.published, slug=self.kwargs[self.slug_url_kwarg])
 
 
-def tag_view(request: HttpRequest, tag_slug: str) -> HttpResponse:
-    tag = get_object_or_404(klass=Tag, slug=tag_slug)
-    actors = tag.tags.filter(is_published=Actor.PublishedStatus.PUBLISHED)
-    context = {
-        'title': f'Tag {tag.name}',
-        'actors': actors,
-        'category_selected': None,
-    }
-    return render(request=request, template_name='actors/index.html', context=context)
+class TagListView(DataMixin, ListView):
+    model = Actor
+    template_name = 'actors/index.html'
+    context_object_name = 'actors'
+    paginate_by = 10
+    allow_empty = False
+
+    def get_context_data(self, **kwargs) -> dict:
+        tag = get_object_or_404(klass=Tag, slug=self.kwargs['tag_slug'])
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context=context, title=f'Tag - {tag.name}')
+
+    def get_queryset(self) -> QuerySet[Actor]:
+        return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-def add_actor_view(request: HttpRequest) -> HttpResponse:
-    if request.method == 'POST':
-        form = ActorForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('actors:index')
-    else:
-        form = ActorForm()
-    context = {
-        'title': 'Add new post',
-        'form': form,
-    }
-    return render(request=request, template_name='actors/add_actor.html', context=context)
+class ActorFormView(DataMixin, CreateView):
+    form_class = ActorForm
+    template_name = 'actors/form.html'
+    title_page = 'Add post'
+
+
+class ActorUpdateView(DataMixin, UpdateView):
+    model = Actor
+    form_class = ActorForm
+    template_name = 'actors/form.html'
+    title_page = 'Edit post'

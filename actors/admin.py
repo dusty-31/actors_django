@@ -26,7 +26,7 @@ class ProducerFilter(admin.SimpleListFilter):
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
-    fields = ('first_name', 'last_name', 'slug', 'get_photo', 'photo', 'biography', 'category', 'producer')
+    fields = ('first_name', 'last_name', 'slug', 'get_photo', 'photo', 'biography', 'category', 'tags', 'producer')
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     list_display = ('id', 'get_full_name', 'get_small_photo', 'time_create', 'is_published', 'category')
     list_display_links = ('id', 'get_full_name')
@@ -34,7 +34,8 @@ class ActorAdmin(admin.ModelAdmin):
     readonly_fields = ('get_photo', )
     actions = ('publish_actors', 'remove_from_publication')
     search_fields = ('first_name', 'last_name', 'category__name')
-    list_filter = (ProducerFilter, 'category', 'is_published',)
+    list_filter = (ProducerFilter, 'category', 'is_published', 'tags')
+    filter_horizontal = ('tags',)
 
     save_on_top = True
 

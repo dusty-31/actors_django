@@ -61,7 +61,7 @@ class Actor(models.Model):
                                        default=PublishedStatus.DRAFT)
     photo = models.ImageField(upload_to='actors_photos/', blank=True, null=True)
     category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
-    tags = models.ManyToManyField(related_name='tags', to=Tag, blank=True)
+    tags = models.ManyToManyField(related_name='actors', to=Tag, blank=True)
     producer = models.OneToOneField(related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True,
                                     blank=True)
 
@@ -77,7 +77,7 @@ class Actor(models.Model):
         return super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse(viewname='actors:post', kwargs={'post_slug': self.slug})
+        return reverse(viewname='actors:post', kwargs={'slug': self.slug})
 
     def get_full_name(self) -> str:
         return f'{self.first_name} {self.last_name}'
