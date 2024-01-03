@@ -8,7 +8,7 @@
                 <div class="article-panel">
                     <p class="first">
                         Category: {{ actor.category.name }} |
-                        Author: {{ actor.author.username|default:unknown }} |
+                        Author: {{ actor.author.username|default:'unknown' }} |
                     </p>
                     <p class="last">Date: {{ actor.time_update|date:"d-m-Y H:i:s" }}</p>
                 </div>

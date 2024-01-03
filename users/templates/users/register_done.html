@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Welcome!</h1>
+    <p>
+        You have successfully registered for the site! To enter the system, you need to log in by clicking
+        <a href="{% url 'users:login' %}">here</a>.
+    </p>
+{% endblock %}
