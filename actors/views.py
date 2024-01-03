@@ -88,7 +88,7 @@ class TagListView(DataMixin, ListView):
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class ActorFormView(LoginRequiredMixin, DataMixin, CreateView):
+class ActorCreateView(LoginRequiredMixin, DataMixin, CreateView):
     form_class = ActorForm
     template_name = 'actors/form.html'
     title_page = 'Add post'
@@ -104,3 +104,5 @@ class ActorUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
     form_class = ActorForm
     template_name = 'actors/form.html'
     title_page = 'Edit post'
+
+
