@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -46,10 +47,11 @@ class CategoryListView(DataMixin, ListView):
     def get_context_data(self, **kwargs) -> dict:
         category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context=context,
-                                      title=f'Category - {category.name}',
-                                      category_selected=category.slug,
-                                      )
+        return self.get_mixin_context(
+            context=context,
+            title=f'Category - {category.name}',
+            category_selected=category.slug,
+        )
 
 
 class ActorDetailView(DataMixin, DetailView):
@@ -60,10 +62,11 @@ class ActorDetailView(DataMixin, DetailView):
     def get_context_data(self, **kwargs) -> dict:
         actor = get_object_or_404(Actor, slug=self.kwargs[self.slug_url_kwarg])
         context = super().get_context_data(**kwargs)
-        return self.get_mixin_context(context=context,
-                                      title=f'Actor - {actor.get_full_name()}',
-                                      selected_category=actor.category.slug,
-                                      )
+        return self.get_mixin_context(
+            context=context,
+            title=f'Actor - {actor.get_full_name()}',
+            selected_category=actor.category.slug,
+        )
 
     def get_object(self, **kwargs) -> Actor:
         return get_object_or_404(Actor.published, slug=self.kwargs[self.slug_url_kwarg])
@@ -85,14 +88,21 @@ class TagListView(DataMixin, ListView):
         return Actor.published.filter(tags__slug=self.kwargs['tag_slug'])
 
 
-class ActorFormView(DataMixin, CreateView):
+class ActorCreateView(LoginRequiredMixin, DataMixin, CreateView):
     form_class = ActorForm
     template_name = 'actors/form.html'
     title_page = 'Add post'
 
+    def form_valid(self, form):
+        actor = form.save(commit=False)
+        actor.author = self.request.user
+        return super().form_valid(form)
 
-class ActorUpdateView(DataMixin, UpdateView):
+
+class ActorUpdateView(LoginRequiredMixin, DataMixin, UpdateView):
     model = Actor
     form_class = ActorForm
     template_name = 'actors/form.html'
     title_page = 'Edit post'
+
+

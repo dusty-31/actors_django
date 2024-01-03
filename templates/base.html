@@ -34,9 +34,18 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-                <li class="last">
-                    <a href="#">Login</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="last">
+                        {{ user.username }} | <a href="{% url 'users:logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="last">
+                        <a href="{% url 'users:login' %}">Login</a>
+                        |
+                        <a href="{% url 'users:register' %}">Register</a>
+                    </li>
+                {% endif %}
+
             </ul>
             <div class="clear"></div>
         </div>

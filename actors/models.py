@@ -1,4 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import QuerySet
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
@@ -42,7 +44,7 @@ class Tag(models.Model):
 
 
 class PublishedManager(models.Manager):
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(is_published=Actor.PublishedStatus.PUBLISHED)
 
 
@@ -57,13 +59,35 @@ class Actor(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, default='')
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)),
-                                       default=PublishedStatus.DRAFT)
+    is_published = models.BooleanField(
+        choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)),
+        default=PublishedStatus.DRAFT
+    )
     photo = models.ImageField(upload_to='actors_photos/', blank=True, null=True)
-    category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
-    tags = models.ManyToManyField(related_name='actors', to=Tag, blank=True)
-    producer = models.OneToOneField(related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True,
-                                    blank=True)
+    category = models.ForeignKey(
+        related_name='actors',
+        to=Category,
+        on_delete=models.PROTECT,
+        null=True
+    )
+    tags = models.ManyToManyField(
+        related_name='actors',
+        to=Tag,
+        blank=True
+    )
+    producer = models.OneToOneField(
+        related_name='producer',
+        to='Producer',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    author = models.ForeignKey(
+        related_name='actors',
+        to=get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
     objects = models.Manager()
     published = PublishedManager()
