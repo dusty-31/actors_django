@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <h1>Profile</h1>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
+        {% if user.photo %}
+            <img src="{{ user.photo.url }}" alt="user_photo">
+        {% else %}
+            <img src="{% static 'images/default.jpeg' %}" alt="default-photo">
+        {% endif %}
         <div class="form-error">
             {{ form.non_field_errors }}
         </div>
