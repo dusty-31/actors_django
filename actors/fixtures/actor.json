@@ -1,0 +1,182 @@
+[
+  {
+    "model": "actors.actor",
+    "pk": 1,
+    "fields": {
+      "first_name": "Jack",
+      "last_name": "Nicholson",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "jack-nicholson",
+      "time_create": "2023-12-27T21:03:13.530Z",
+      "time_update": "2024-01-02T10:24:07.784Z",
+      "is_published": true,
+      "photo": "actors_photos/jack-nicholson.jpg",
+      "category": 1,
+      "producer": null,
+      "author": 1,
+      "tags": [
+        1,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 2,
+    "fields": {
+      "first_name": "Marlon",
+      "last_name": "Brando",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "marlon-brando",
+      "time_create": "2023-12-27T21:03:25.501Z",
+      "time_update": "2024-01-01T18:09:07.318Z",
+      "is_published": true,
+      "photo": "actors_photos/marlon_brando.jpg",
+      "category": 1,
+      "producer": 2,
+      "author": 1,
+      "tags": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 3,
+    "fields": {
+      "first_name": "Robert",
+      "last_name": "De Niro",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "robert-de-niro",
+      "time_create": "2023-12-27T21:04:21.494Z",
+      "time_update": "2024-01-01T18:09:14.577Z",
+      "is_published": true,
+      "photo": "actors_photos/robert_de_niro.jpg",
+      "category": 1,
+      "producer": 3,
+      "author": 1,
+      "tags": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 4,
+    "fields": {
+      "first_name": "Al",
+      "last_name": "Pacino",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "al-pacino",
+      "time_create": "2023-12-27T21:04:35.853Z",
+      "time_update": "2024-01-01T18:09:18.171Z",
+      "is_published": true,
+      "photo": "",
+      "category": 1,
+      "producer": null,
+      "author": 1,
+      "tags": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 5,
+    "fields": {
+      "first_name": "Daniel",
+      "last_name": "Day-Lewis",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "daniel-day-lewis",
+      "time_create": "2023-12-27T21:04:48.215Z",
+      "time_update": "2024-01-01T18:09:27.692Z",
+      "is_published": true,
+      "photo": "actors_photos/daniel_day-lewis.jpg",
+      "category": 1,
+      "producer": null,
+      "author": 1,
+      "tags": [
+        2,
+        5
+      ]
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 6,
+    "fields": {
+      "first_name": "Cate",
+      "last_name": "Blanchett",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "cate-blanchett",
+      "time_create": "2023-12-28T10:34:31.910Z",
+      "time_update": "2024-01-01T18:09:38.595Z",
+      "is_published": true,
+      "photo": "actors_photos/cate_blanchett.jpg",
+      "category": 2,
+      "producer": 5,
+      "author": 1,
+      "tags": []
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 9,
+    "fields": {
+      "first_name": "Denzel",
+      "last_name": "Washington",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "denzel-washington",
+      "time_create": "2023-12-31T21:03:56.821Z",
+      "time_update": "2024-01-01T18:13:55.479Z",
+      "is_published": true,
+      "photo": "actors_photos/denzel_washington.jpg",
+      "category": 1,
+      "producer": null,
+      "author": 1,
+      "tags": []
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 15,
+    "fields": {
+      "first_name": "Tom",
+      "last_name": "Hanks",
+      "biography": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam doloremque doloribus esse id ipsam iure labore nulla quasi quibusdam quo sequi, voluptas. Aliquid blanditiis facere itaque pariatur quos reprehenderit sit soluta tenetur vel veritatis! Iusto possimus, vero. Aut ipsum sit vero. Ad aliquid asperiores eius enim, facere ipsa maxime minus natus non, obcaecati, praesentium totam ut? Cum distinctio fugiat officia porro possimus! Adipisci assumenda at autem debitis delectus, dignissimos hic, ipsa iste iusto nulla quam quibusdam, quos repellat sed temporibus voluptatem voluptatum. Aperiam aspernatur at beatae commodi dolor ducimus enim est ex exercitationem harum inventore ipsa, ipsam ipsum itaque iure maiores maxime molestiae odio officia officiis pariatur porro provident qui, recusandae repudiandae sapiente sint sit veniam vitae voluptate. Optio, quas, quod. Aliquam delectus ex libero maiores omnis provident reiciendis vitae! At blanditiis culpa ducimus eligendi eos exercitationem explicabo facilis id impedit in iusto magni nisi nobis nostrum officiis pariatur placeat, quae quas repellendus rerum sint, soluta tempora tenetur totam veritatis vero voluptate. Cumque debitis esse excepturi iste iure iusto maiores minima nihil perferendis, quidem quos rem sed suscipit veniam, voluptatum. Accusamus ad adipisci aliquam aliquid amet animi aperiam aspernatur at atque blanditiis commodi dolore doloribus ea earum eius enim eos et fuga illum impedit incidunt inventore ipsam maiores minima minus nesciunt nihil perspiciatis placeat possimus quas quasi quos repudiandae, sapiente sunt tempore temporibus totam! Accusamus aut modi mollitia placeat quis. Alias cumque doloremque, esse expedita, incidunt ipsum labore maxime modi officiis ratione, sit ut veniam veritatis. Adipisci architecto atque culpa cumque, cupiditate delectus dignissimos dolor eos hic id mollitia nulla odit omnis pariatur quia quibusdam rerum vero voluptatibus. Accusamus alias architecto asperiores consequatur cumque delectus deserunt eos ipsam, itaque labore laboriosam laborum magni neque nobis odit quibusdam quo ratione repellendus similique sint sunt ullam veniam voluptatibus? A ad natus sequi?",
+      "slug": "tom-hanks",
+      "time_create": "2024-01-01T14:27:17.745Z",
+      "time_update": "2024-01-01T17:41:48.722Z",
+      "is_published": true,
+      "photo": "actors_photos/tom_hanks.jpg",
+      "category": 1,
+      "producer": null,
+      "author": 1,
+      "tags": []
+    }
+  },
+  {
+    "model": "actors.actor",
+    "pk": 20,
+    "fields": {
+      "first_name": "Dusty",
+      "last_name": "Wayne",
+      "biography": "sadjalkjdasldjaldjakdjasd",
+      "slug": "dusty-wayne",
+      "time_create": "2024-01-02T18:54:39.117Z",
+      "time_update": "2024-01-02T18:54:39.117Z",
+      "is_published": true,
+      "photo": "",
+      "category": 1,
+      "producer": 1,
+      "author": 1,
+      "tags": [
+        1,
+        2
+      ]
+    }
+  }
+]

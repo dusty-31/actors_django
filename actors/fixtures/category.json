@@ -1,0 +1,18 @@
+[
+  {
+    "model": "actors.category",
+    "pk": 1,
+    "fields": {
+      "name": "Men",
+      "slug": "men"
+    }
+  },
+  {
+    "model": "actors.category",
+    "pk": 2,
+    "fields": {
+      "name": "Women",
+      "slug": "women"
+    }
+  }
+]

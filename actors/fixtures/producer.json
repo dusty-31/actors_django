@@ -1,0 +1,56 @@
+[
+  {
+    "model": "actors.producer",
+    "pk": 1,
+    "fields": {
+      "first_name": "David",
+      "last_name": "Guetta",
+      "age": 43
+    }
+  },
+  {
+    "model": "actors.producer",
+    "pk": 2,
+    "fields": {
+      "first_name": "Steve",
+      "last_name": "Angelo",
+      "age": 24
+    }
+  },
+  {
+    "model": "actors.producer",
+    "pk": 3,
+    "fields": {
+      "first_name": "Oliver",
+      "last_name": "Heldens",
+      "age": 49
+    }
+  },
+  {
+    "model": "actors.producer",
+    "pk": 4,
+    "fields": {
+      "first_name": "John",
+      "last_name": "Summit",
+      "age": 59
+    }
+  },
+  {
+    "model": "actors.producer",
+    "pk": 5,
+    "fields": {
+      "first_name": "Sebastian",
+      "last_name": "Ingrosso",
+      "age": 45
+    }
+  },
+  {
+    "model": "actors.producer",
+    "pk": 6,
+    "fields": {
+      "first_name": "Dusty",
+      "last_name": "Wayne",
+      "age": 20
+    }
+  }
+]

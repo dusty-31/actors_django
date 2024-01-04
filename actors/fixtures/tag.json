@@ -1,0 +1,42 @@
+[
+  {
+    "model": "actors.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Film Icons",
+      "slug": "film-icons"
+    }
+  },
+  {
+    "model": "actors.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Rising Stars",
+      "slug": "rising-stars"
+    }
+  },
+  {
+    "model": "actors.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Behind the Scenes",
+      "slug": "behind-the-scenes"
+    }
+  },
+  {
+    "model": "actors.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Method Acting",
+      "slug": "method-acting"
+    }
+  },
+  {
+    "model": "actors.tag",
+    "pk": 5,
+    "fields": {
+      "name": "Cinematic Legends",
+      "slug": "cinematic-legends"
+    }
+  }
+]

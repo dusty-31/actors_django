@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Login</h1>
+    <h1>Profile</h1>
     <form action="" method="POST">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
@@ -14,12 +14,13 @@
                 {{ field }}
             </p>
             <div class="form-error">
-                {{ field.errors }}
+                {{ form.errors }}
             </div>
         {% endfor %}
-        <p>
-            <a href="{% url 'users:password_reset' %}">Forgot password?</a>
-        </p>
-        <button type="submit">Login</button>
+        <button type="submit">Send</button>
     </form>
+    <hr>
+    <p>
+        <a href="{% url 'users:change_password' %}">Change password</a>
+    </p>
 {% endblock %}
