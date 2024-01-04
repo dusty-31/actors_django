@@ -139,10 +139,13 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'actors:index'
 LOGOUT_REDIRECT_URL = 'actors:index'
 
-
 # Authentication user
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'users.auth.EmailBackend',
 )
+
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
