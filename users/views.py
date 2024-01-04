@@ -32,7 +32,7 @@ class UserRegisterDoneView(View):
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserProfileForm
     template_name = 'users/profile.html'
-    success_url = reverse_lazy('users:profile')
+    success_url = reverse_lazy('actors:index')
     extra_context = {'title': 'Profile'}
 
     def get_object(self, queryset=None):
