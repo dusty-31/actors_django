@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, UpdateView
-from django.urls import reverse_lazy
 
-from users.forms import UserLoginForm, RegisterUserForm, UserProfileForm, UserPasswordChangeForm
+from users.forms import RegisterUserForm, UserLoginForm, UserPasswordChangeForm, UserProfileForm
 
 
 class UserLoginView(LoginView):
@@ -24,6 +24,7 @@ class UserLoginView(LoginView):
     - extra_context: A dictionary of additional context data to be passed to the template.
 
     """
+
     template_name = 'users/login.html'
     form_class = UserLoginForm
     extra_context = {'title': 'Login'}
@@ -44,6 +45,7 @@ class UserRegisterCreateView(CreateView):
         template_name: The name of the template to use for rendering the registration form.
         success_url: URL to navigate to on successful form validation and user registration.
     """
+
     form_class = RegisterUserForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:register_done')
@@ -80,6 +82,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         extra_context: A dictionary to be added to the template context.
         It contains a single key-value pair, with 'title' as the key.
     """
+
     form_class = UserProfileForm
     template_name = 'users/profile.html'
     success_url = reverse_lazy('actors:index')
@@ -116,6 +119,7 @@ class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
         template_name: The name of the template used for rendering this view.
         success_url: The URL a user is redirected to if the password change was successful.
     """
+
     form_class = UserPasswordChangeForm
     template_name = 'users/change_password_form.html'
     success_url = reverse_lazy('users:change_password_done')
@@ -124,16 +128,17 @@ class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 class UserLogoutView(LoginRequiredMixin, LogoutView):
     """View for user logout.
 
-     Allows to log out a user by making either a 'post' or 'get' request. This view ensures the user is logged in
-     before attempting the logout thanks to the `LoginRequiredMixin`.
+    Allows to log out a user by making either a 'post' or 'get' request. This view ensures the user is logged in
+    before attempting the logout thanks to the `LoginRequiredMixin`.
 
-     Attribute:
-         http_method_names (list): Sets the allowed HTTP methods for this view.
+    Attribute:
+        http_method_names (list): Sets the allowed HTTP methods for this view.
 
-     Inherits:
-         LoginRequiredMixin: A mixin that requires a user to be logged in.
-         LogoutView: Django's built-in view that logs out the user.
-     """
+    Inherits:
+        LoginRequiredMixin: A mixin that requires a user to be logged in.
+        LogoutView: Django's built-in view that logs out the user.
+    """
+
     http_method_names = ['post', 'options', 'get']
 
     def get(self, request, *args, **kwargs):

@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest
 from django.utils.safestring import mark_safe
 
-from .models import Actor, Category, Tag, Producer
+from .models import Actor, Category, Producer, Tag
 from .services import pluralize
 
 
@@ -18,6 +18,7 @@ class ProducerFilter(admin.SimpleListFilter):
         title: A string defining the title of the filter.
         parameter_name: A string defining the parameter used in the filter.
     """
+
     title = 'Producer'
     parameter_name = 'producer'
 
@@ -44,9 +45,20 @@ class ActorAdmin(admin.ModelAdmin):
     Attributes:
         ACTOR_WORD (str): Word to be used in the messages shown after actions.
     """
+
     fields = (
-        'first_name', 'last_name', 'slug', 'get_photo', 'photo', 'biography', 'category', 'tags', 'producer', 'author',
-        'time_create', 'time_update',
+        'first_name',
+        'last_name',
+        'slug',
+        'get_photo',
+        'photo',
+        'biography',
+        'category',
+        'tags',
+        'producer',
+        'author',
+        'time_create',
+        'time_update',
     )
     prepopulated_fields = {'slug': ('first_name', 'last_name')}
     list_display = ('id', 'get_full_name', 'get_small_photo', 'time_create', 'author', 'is_published', 'category')
@@ -105,9 +117,7 @@ class ActorAdmin(admin.ModelAdmin):
         """
         if count:
             word = pluralize(count=count, word=self.ACTOR_WORD)
-            self.message_user(request=request,
-                              message=message.format(count=count, word=word),
-                              level=level)
+            self.message_user(request=request, message=message.format(count=count, word=word), level=level)
 
     @admin.display(description='Full name')
     def get_full_name(self, actor: Actor) -> str:
@@ -189,12 +199,14 @@ class ActorAdmin(admin.ModelAdmin):
             request=request,
             count=successfully_removed,
             message='Successfully removed {count} {word}.',
-            level=messages.SUCCESS)
+            level=messages.SUCCESS,
+        )
         self.notify_status(
             request=request,
             count=not_removed,
             message='Changes weren\'t applied to {count} {word}.',
-            level=messages.WARNING)
+            level=messages.WARNING,
+        )
 
 
 @admin.register(Category)
@@ -203,6 +215,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     The Category model's id and name fields are displayed.
     """
+
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
 
@@ -214,6 +227,7 @@ class TagAdmin(admin.ModelAdmin):
     The Tag model's id and name fields are displayed.
 
     """
+
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
 
@@ -227,6 +241,7 @@ class ProducerAdmin(admin.ModelAdmin):
     Methods:
         get_full_name: Return the full name of the producer.
     """
+
     list_display = ('id', 'get_full_name', 'age')
     list_display_links = ('id', 'get_full_name')
     ordering = ('id', 'age')

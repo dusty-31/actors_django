@@ -14,6 +14,7 @@ class Category(models.Model):
         name (CharField): The name of the category. Has a limit of 50 characters.
         slug (SlugField): The slug of the category. Used in URL. Unique and default value is an empty string.
     """
+
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, unique=True, default='')
 
@@ -40,9 +41,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         """Returns the URL that shows the detail view of the category.
 
-         Returns:
-             string: The URL of the category's detail view.
-         """
+        Returns:
+            string: The URL of the category's detail view.
+        """
         return reverse(viewname='actors:category', kwargs={'category_slug': self.slug})
 
 
@@ -53,6 +54,7 @@ class Tag(models.Model):
         name (CharField): The name of the tag. Has a limit of 100 characters and must be unique.
         slug (SlugField): The slug of the tag. Used in URL. Unique and the default value is an empty string.
     """
+
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=255, unique=True, default='')
 
@@ -127,7 +129,11 @@ class Actor(models.Model):
 
     class PublishedStatus(models.IntegerChoices):
         """Choices for the publish status of an actor."""
-        DRAFT = 0, 'Draft',
+
+        DRAFT = (
+            0,
+            'Draft',
+        )
         PUBLISHED = 1, 'Published'
 
     first_name = models.CharField(max_length=50)
@@ -137,27 +143,13 @@ class Actor(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(
-        choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)),
-        default=PublishedStatus.DRAFT
+        choices=tuple(map(lambda x: (bool(x[0]), x[1]), PublishedStatus.choices)), default=PublishedStatus.DRAFT
     )
     photo = models.ImageField(upload_to='actors_photos/', blank=True, null=True)
-    category = models.ForeignKey(
-        related_name='actors',
-        to=Category,
-        on_delete=models.PROTECT,
-        null=True
-    )
-    tags = models.ManyToManyField(
-        related_name='actors',
-        to=Tag,
-        blank=True
-    )
+    category = models.ForeignKey(related_name='actors', to=Category, on_delete=models.PROTECT, null=True)
+    tags = models.ManyToManyField(related_name='actors', to=Tag, blank=True)
     producer = models.OneToOneField(
-        related_name='producer',
-        to='Producer',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
+        related_name='producer', to='Producer', on_delete=models.SET_NULL, null=True, blank=True
     )
     author = models.ForeignKey(
         related_name='actors',
@@ -212,6 +204,7 @@ class Producer(models.Model):
         last_name (CharField): The last name of the producer, a maximum of 50 characters.
         age (IntegerField): The age of the producer. It can be null.
     """
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     age = models.IntegerField(null=True)

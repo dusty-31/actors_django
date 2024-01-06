@@ -11,5 +11,6 @@ class User(AbstractUser):
         photo (ImageField): A field for storing user's photo, which is not mandatory.
         date_birth (DateField): A field for storing the user's date of birth, which is not mandatory.
     """
+
     photo = models.ImageField(upload_to='users_photos/', blank=True, null=True)
     date_birth = models.DateField(blank=True, null=True)

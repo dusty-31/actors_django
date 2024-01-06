@@ -18,6 +18,7 @@ class DataMixin:
         get_mixin_context(self, context: dict, **kwargs) -> dict
             Adds the extra_content and the provided keyword arguments to the given context dictionary and returns the updated context.
     """
+
     title_page = None
     category_selected = None
     extra_content = {}

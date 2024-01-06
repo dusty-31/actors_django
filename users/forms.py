@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserCreationForm
 
 
 class UserLoginForm(AuthenticationForm):
@@ -15,6 +15,7 @@ class UserLoginForm(AuthenticationForm):
         username (CharField): The username or email field for authentication.
         password (CharField): The password field for authentication.
     """
+
     username = forms.CharField(
         label='Username or E-mail:',
         widget=forms.TextInput(attrs={'class': 'form-input'}),
@@ -38,6 +39,7 @@ class RegisterUserForm(UserCreationForm):
     Attributes:
         password2 (CharField): The field used to confirm password entry.
     """
+
     password2 = forms.CharField(
         label='Repeat password:',
         widget=forms.PasswordInput(attrs={'class': 'form-input'}),
@@ -110,16 +112,9 @@ class UserProfileForm(forms.ModelForm):
         Meta: Defines additional metadata for UserProfileForm, such as the fields included in
         the form and the widgets used to render them.
     """
-    username = forms.CharField(
-        label='Username:',
-        disabled=True,
-        widget=forms.TextInput(attrs={'class': 'form-input'})
-    )
-    email = forms.EmailField(
-        label='E-mail:',
-        disabled=True,
-        widget=forms.TextInput(attrs={'class': 'form-input'})
-    )
+
+    username = forms.CharField(label='Username:', disabled=True, widget=forms.TextInput(attrs={'class': 'form-input'}))
+    email = forms.EmailField(label='E-mail:', disabled=True, widget=forms.TextInput(attrs={'class': 'form-input'}))
     this_year = datetime.date.today().year
     date_birth = forms.DateField(
         label='Date of Birth:',
@@ -142,14 +137,15 @@ class UserProfileForm(forms.ModelForm):
 class UserPasswordChangeForm(PasswordChangeForm):
     """Form for changing the user's password.
 
-       This form asks for old password and new password (entered twice for confirmation).
-       Inherits from Django's PasswordChangeForm.
+    This form asks for old password and new password (entered twice for confirmation).
+    Inherits from Django's PasswordChangeForm.
 
-       Attributes:
-           old_password (CharField): The field for the user's old password.
-           new_password1 (CharField): The field for the user's new password.
-           new_password2 (CharField): The field for the user's new password confirmation.
+    Attributes:
+        old_password (CharField): The field for the user's old password.
+        new_password1 (CharField): The field for the user's new password.
+        new_password2 (CharField): The field for the user's new password confirmation.
     """
+
     old_password = forms.CharField(
         label='Old password:',
         widget=forms.PasswordInput(attrs={'class': 'form-input'}),
