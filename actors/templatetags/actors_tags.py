@@ -1,5 +1,6 @@
 from django import template
 from django.db.models import Count
+
 from actors.models import Category, Tag
 
 register = template.Library()

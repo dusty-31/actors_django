@@ -37,6 +37,10 @@
                 {% if user.is_authenticated %}
                     <li class="last">
                         <a href="{% url 'users:profile' %}">{{ user.username }}</a> |
+{#                        <form action="{% url 'users:logout' %}" id="logout" method="post">#}
+{#                            {% csrf_token %}#}
+{#                            <a onclick="document.querySelector('#logout').submit()">Logout</a>#}
+{#                        </form>#}
                         <a href="{% url 'users:logout' %}">Logout</a>
                     </li>
                 {% else %}
